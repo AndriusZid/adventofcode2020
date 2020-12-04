@@ -325,14 +325,14 @@ const rawData = `.#..........#......#..#.....#..
 const lines = rawData.split(`
 `);
 
-function calculateTrees(data) {
-  let treeCount = 0;
+function calculateTrees(data, stepDown = 1, stepRight = 3) {
+    let treeCount = 0;
 	let j = 0;
     const totalLines = data.length;
     const lineWidth = data[0].length;
 
-    for (var i = 1; i < totalLines; i++) {
-      j = j + 3;
+    for (var i = 1; i < totalLines; i=i+stepDown) {
+      j = j + stepRight;
       const charIndex = (j % lineWidth);
       let char = data[i].charAt(charIndex);
       
@@ -341,9 +341,8 @@ function calculateTrees(data) {
       }
 
     }
-
+    console.log(treeCount);
     return treeCount;
 }
 
-const result = calculateTrees(lines);
-console.log(result);
+calculateTrees(lines, 1, 3) * calculateTrees(lines, 1, 1) * calculateTrees(lines, 1, 5) * calculateTrees(lines, 1, 7) * calculateTrees(lines, 2, 1);
